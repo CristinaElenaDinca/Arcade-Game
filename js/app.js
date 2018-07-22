@@ -19,9 +19,11 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + this.speed * dt
     // when the coordinates for the enemy and the player get enough close to look 
     // like a collision, all the coordinates for location are reassigned with the starting values
-    if (((player.x - this.x) < 10) && ((player.y - this.y )< 30)) {
+    if (((player.x - this.x) < 40) && ((player.x - this.x) > -40) && ((player.y - this.y ) < 40) && ((player.y - this.y ) > -40)) {
         player.x = 300;
         player.y = 400;
+    }       
+    if (this.x > 500) {
         this.x = 1;
     }
 };
@@ -54,7 +56,7 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(key) {
     if(key === "up"){
-        // make sure that incrementing the position will not get the player outside the canvas
+        // makes sure that incrementing the position will not get the player outside the canvas
         if(this.y > -10) {
           this.y -= 50;  
         }
