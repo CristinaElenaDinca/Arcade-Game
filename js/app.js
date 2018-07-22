@@ -17,14 +17,17 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    if (this.x !== 505) {
-        this.x = this.x + this.speed * dt
+
+    //while (this.x < 506) {
+    this.x = this.x + this.speed * dt
+    //};
+    //this.x = 1;
+    if (((player.x - this.x) < 10) && ((player.y - this.y )< 10)) {
+        player.x = 300;
+        player.y = 400;
+        this.x = 1;
+
     }
-    else {
-     this.x = 1;
-     this.x = this.x + this.speed * dt
-     }
-    
 };
 
 
@@ -47,9 +50,7 @@ var Player = function () {
 };
 
 Player.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    
 
 };
 
@@ -59,16 +60,43 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function(z) {
+Player.prototype.handleInput = function(key) {
+    if(key === "up"){
+        if(this.y > -10) {
+          this.y -= 50;  
+        }
+        if (this.y < 0) {
+            alert ('Yeeeeey! You made it!');
+            this.y = 400;
+            this.x = 300;
+        }
+    }
+    if(key === "down"){
+        if(this.y < 400) {
+          this.y += 50;  
+        }
+    }
+    if(key === "right"){
+        if(this.x < 400) {
+          this.x += 50;  
+        }
 
-}
+    }
+    if(key === "left") {
+        if(this.x > 20) {
+          this.x -= 50;  
+        }
+    }
+ };
+
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
 const player = new Player();
-const allEnemies = [new Enemy(130, 500), new Enemy(50, 280), new Enemy(230, 200), new Enemy(150, 340)];
+const allEnemies = [new Enemy(130, 100), new Enemy(50, 180), new Enemy(230, 100), new Enemy(150, 140)];
 
 
 
